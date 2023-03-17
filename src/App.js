@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate, useParams } from "react-router-dom";
 import { Counter } from "./Counter";
 import { AddColor } from "./AddColor";
 import { Profile } from "./Profile";
@@ -91,12 +91,22 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/books" element={<BookList />} />
+
+        <Route path="/books/:bookid" element={<BookDetail />} />
+
         <Route path="/add-color" element={<AddColor />} />
         <Route path="/profile" element={<Users />} />
       </Routes>
     </div>
   );
 }
+
+function BookDetail() {
+  const { bookid } = useParams()
+
+  return <h1>Book Detail Page - {bookid}</h1>;
+}
+
 function Users() {
   const users = [
     {
@@ -135,13 +145,14 @@ function BookList() {
   return (
     <div className="book-list">
       {bookList.map((bk, index) => (
-        <Book key={index} book={bk} />
+        <Book key={index} book={bk} id={index} />
       ))}
     </div>
   );
 }
 
-function Book({ book }) {
+function Book({ book, id }) {
+  const navigate = useNavigate();
   const styles = {
     color: book.rating > 8 ? "green" : "red",
   };
@@ -156,13 +167,15 @@ function Book({ book }) {
     <div className="book-container">
       <img className="book-poster" src={book.poster} alt={book.name} />
       <div className="book-spec">
-        <h2 className="book-name">{book.name}</h2>
+        <h2 className="book-name">
+          {book.name} - {id}
+        </h2>
         <p style={styles} className="book-rating">
           ⭐{book.rating}
         </p>
       </div>
       <button onClick={() => setShow(!show)}>Toggle description</button>
-      <button>Info</button>
+      <button onClick={() => navigate("/books/" + id)}>Info</button>
       {/* <p style={Summarystyles} className="book-summary">
         {book.summary}
       </p> */}
@@ -177,3 +190,8 @@ function Book({ book }) {
 //info button ✅
 //3rd feature in react VDOM - ✅
 //routing - ✅
+
+
+//Add Book
+// 4 input fields - poster, name, rating, summary
+//button  - AddBook

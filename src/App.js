@@ -102,7 +102,7 @@ export default function App() {
 }
 
 function BookDetail() {
-  const { bookid } = useParams()
+  const { bookid } = useParams();
 
   return <h1>Book Detail Page - {bookid}</h1>;
 }
@@ -141,12 +141,58 @@ function Home() {
 }
 
 function BookList() {
-  const bookList = INITIAL_BOOK_LIST;
+  //const bookList = INITIAL_BOOK_LIST;
+  const [bookList, setBookList] = useState(INITIAL_BOOK_LIST);
+  const [name, setName] = useState("");
+  const [poster, setPoster] = useState("");
+  const [rating, setRating] = useState("");
+  const [summary, setSummary] = useState("");
+
   return (
-    <div className="book-list">
-      {bookList.map((bk, index) => (
-        <Book key={index} book={bk} id={index} />
-      ))}
+    <div>
+      <div className="add-book-form">
+        <input
+          value={name}
+          type="text"
+          onChange={(event) => setName(event.target.value)}
+          placeholder="Enter name"
+        />
+        <input
+          type="text"
+          onChange={(event) => setPoster(event.target.value)}
+          placeholder="Enter poster"
+        />
+        <input
+          type="text"
+          onChange={(event) => setRating(event.target.value)}
+          placeholder="Enter rating"
+        />
+        <input
+          type="text"
+          onChange={(event) => setSummary(event.target.value)}
+          placeholder="Enter summary"
+        />
+        {/* copy the bookList and add newBook */}
+        <button
+          onClick={() => {
+            const newBook = {
+              name: name,
+              poster: poster,
+              rating: rating,
+              summary: summary,
+            };
+            setBookList([...bookList, newBook]);
+          }}
+        >
+          Add Book
+        </button>
+      </div>
+
+      <div className="book-list">
+        {bookList.map((bk, index) => (
+          <Book key={index} book={bk} id={index} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -191,7 +237,6 @@ function Book({ book, id }) {
 //3rd feature in react VDOM - ✅
 //routing - ✅
 
-
-//Add Book
+//Add Book - Task - 15 mins
 // 4 input fields - poster, name, rating, summary
 //button  - AddBook

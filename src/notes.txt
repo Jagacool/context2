@@ -80,3 +80,33 @@
   {/* {users.map((usr) => (
         <Profile name={usr.name} pic={usr.pic} />
       ))} */}
+
+
+
+      
+//toggle descrption ✅
+//info button ✅
+//3rd feature in react VDOM - ✅
+//routing - ✅
+
+//Add Book - Task - 15 mins
+// 4 input fields - poster, name, rating, summary
+//button  - AddBook
+
+
+//BookList(data)  -> Book(data) -> Counter(data)
+//            -> Contact(data)
+
+//React flows in only one direction || Pass from parent to child ✅ | Not from child to parent ❌
+
+
+                        App(bookList, setBookList)  🗻
+
+
+       
+                
+     BookList 🌊                      BookDetails 🌊            
+
+     //unidirectional
+
+     

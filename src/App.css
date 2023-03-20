@@ -67,3 +67,8 @@
   gap: 10px;
   margin-bottom: 16px;
 }
+
+
+.book-detail-container {
+  max-width: 800px;
+}

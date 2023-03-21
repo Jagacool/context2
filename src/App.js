@@ -1,13 +1,23 @@
 import "./App.css";
 import { useState } from "react";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 import { AddColor } from "./AddColor";
 import { Home } from "./Home";
 import { Users } from "./Users";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { BookList } from "./BookList";
 import { BookDetail } from "./BookDetail";
-
+import { NotFoundPage } from "./NotFoundPage";
+import { AddBook } from "./AddBook";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { ExampleContext } from "./ExampleContext";
 const INITIAL_BOOK_LIST = [
   {
     name: "Charlotte's web",
@@ -73,60 +83,76 @@ const INITIAL_BOOK_LIST = [
 export default function App() {
   // Lifting the state up =>  Lifted from child to parent
   const [bookList, setBookList] = useState(INITIAL_BOOK_LIST);
+  const navigate = useNavigate();
+  //1. Creating -  createContext ✅
+  //2. Publisher - Provider  - context.Provider ✅
+  //3. Subscriber  - useContext - useContext(context) ❌
+  const [mode, setMode] = useState("light");
+  const theme = createTheme({
+    palette: {
+      mode: mode,
+    },
+  });
+
   return (
-    <div className="App">
-      <nav>
-        <ul>
-          <li>
-            {/* Link changes page without refresh */}
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/books">BookList</Link>
-          </li>
-          <li>
-            <Link to="/add-color">AddColor</Link>
-          </li>
-          <li>
-            <Link to="/profile">Users</Link>
-          </li>
-          <li>
-            <Link to="/somewhere">Somewhere</Link>
-          </li>
-        </ul>
-      </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/books"
-          element={<BookList bookList={bookList} setBookList={setBookList} />}
-        />
-        <Route
-          path="/books/:bookid"
-          element={<BookDetail bookList={bookList} />}
-        />
-        <Route path="/add-color" element={<AddColor />} />
-        <Route path="/profile" element={<Users />} />
-        <Route path="/novel" element={<Navigate replace to="/books" />} />
-        <Route path="/404" element={<NotFoundPage />} />
-        <Route path="*" element={<Navigate replace to="/404" />} />
-      </Routes>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div className="App">
+        <AppBar position="static">
+          <Toolbar>
+            <Button color="inherit" onClick={() => navigate("/")}>
+              Home
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/books")}>
+              BookList
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/add-color")}>
+              AddColor
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/profile")}>
+              Users
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/books/add")}>
+              AddBook
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/context")}>
+              Context
+            </Button>
+            <Button
+              sx={{ marginLeft: "auto" }}
+              startIcon={
+                mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />
+              }
+              color="inherit"
+              onClick={() => setMode(mode === "light" ? "dark" : "light")}
+            >
+              {mode === "light" ? "dark" : "light"} Mode
+            </Button>
+          </Toolbar>
+        </AppBar>
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/books"
+            element={<BookList bookList={bookList} setBookList={setBookList} />}
+          />
+          <Route
+            path="/books/:bookid"
+            element={<BookDetail bookList={bookList} />}
+          />
+          <Route
+            path="/books/add"
+            element={<AddBook bookList={bookList} setBookList={setBookList} />}
+          />
+          <Route path="/add-color" element={<AddColor />} />
+          <Route path="/profile" element={<Users />} />
+          <Route path="/context" element={<ExampleContext />} />
+          <Route path="/novel" element={<Navigate replace to="/books" />} />
+          <Route path="/404" element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate replace to="/404" />} />
+        </Routes>
+      </div>
+    </ThemeProvider>
   );
 }
-
-function NotFoundPage() {
-  return (
-    <div>
-      <img
-        width="650px"
-        src="https://i.pinimg.com/originals/90/fb/43/90fb4379e62ef4104a0bd58bae82fe35.gif"
-        alt="404 not found"
-      />
-    </div>
-  );
-}
-
-//AddBook
-// /book/add -> <AddBook />
-//Add Book  -> Books added  -> /book(BookList Page)

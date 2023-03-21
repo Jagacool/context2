@@ -110,3 +110,28 @@
      //unidirectional
 
      
+
+
+      {/* <nav>
+        <ul>
+          <li>
+            Link changes page without refresh
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/books">BookList</Link>
+          </li>
+          <li>
+            <Link to="/add-color">AddColor</Link>
+          </li>
+          <li>
+            <Link to="/profile">Users</Link>
+          </li>
+          <li>
+            <Link to="/somewhere">Somewhere</Link>
+          </li>
+          <li>
+            <Link to="/books/add">AddBook</Link>
+          </li>
+        </ul>
+      </nav> */}

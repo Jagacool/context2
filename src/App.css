@@ -23,7 +23,8 @@
 }
 
 .add-color {
-  display: flex
+  display: flex;
+  margin-top: 30px
 }
 
 .book-spec {
@@ -59,6 +60,7 @@
   flex-wrap: wrap;
   justify-content: space-around;
   gap: 15px;
+  margin-top: 30px
 }
 
 .add-book-form {
@@ -66,6 +68,7 @@
   flex-direction: column;
   gap: 10px;
   margin-bottom: 16px;
+  margin-top: 30px
 }
 
 

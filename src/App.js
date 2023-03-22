@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 import { AddColor } from "./AddColor";
 import { Home } from "./Home";
@@ -81,8 +81,7 @@ const INITIAL_BOOK_LIST = [
 ];
 
 export default function App() {
-  // Lifting the state up =>  Lifted from child to parent
-  const [bookList, setBookList] = useState(INITIAL_BOOK_LIST);
+  const [bookList, setBookList] = useState([]);
   const navigate = useNavigate();
   //1. Creating -  createContext ✅
   //2. Publisher - Provider  - context.Provider ✅
@@ -133,14 +132,8 @@ export default function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/books"
-            element={<BookList bookList={bookList} setBookList={setBookList} />}
-          />
-          <Route
-            path="/books/:bookid"
-            element={<BookDetail bookList={bookList} />}
-          />
+          <Route path="/books" element={<BookList />} />
+          <Route path="/books/:bookid" element={<BookDetail />} />
           <Route
             path="/books/add"
             element={<AddBook bookList={bookList} setBookList={setBookList} />}

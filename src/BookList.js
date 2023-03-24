@@ -3,8 +3,10 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { Book } from "./Book";
 import { API } from "./global";
+import { Navigate, useNavigate } from "react-router-dom";
 export function BookList() {
   //const bookList = INITIAL_BOOK_LIST;
   // Lifting the state up =>  Lifted from child to parent
@@ -19,6 +21,7 @@ export function BookList() {
   };
 
   useEffect(() => getBooks(), []);
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -49,6 +52,15 @@ export function BookList() {
                 // }}
               >
                 <DeleteIcon />
+              </IconButton>
+            }
+            editButton={
+              <IconButton
+                aria-label="delete"
+                color="secondary"
+                onClick={() => navigate(`/books/edit/${bk.id}`)}
+              >
+                <EditIcon />
               </IconButton>
             }
           />

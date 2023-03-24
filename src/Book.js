@@ -7,7 +7,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InfoIcon from "@mui/icons-material/Info";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { API } from "./global";
-export function Book({ book, id, deleteButton }) {
+export function Book({ book, id, deleteButton, editButton }) {
   const navigate = useNavigate();
   const styles = {
     color: book.rating > 8 ? "green" : "red",
@@ -46,7 +46,11 @@ export function Book({ book, id, deleteButton }) {
       {show ? <p className="book-summary">{book.summary}</p> : null}
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Counter />
-        {deleteButton}
+        <div>
+          {" "}
+          {deleteButton}
+          {editButton}
+        </div>
       </div>
     </div>
   );

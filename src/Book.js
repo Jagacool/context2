@@ -5,8 +5,9 @@ import IconButton from "@mui/material/IconButton";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InfoIcon from "@mui/icons-material/Info";
-
-export function Book({ book, id }) {
+import DeleteIcon from "@mui/icons-material/Delete";
+import { API } from "./global";
+export function Book({ book, id, deleteButton }) {
   const navigate = useNavigate();
   const styles = {
     color: book.rating > 8 ? "green" : "red",
@@ -34,7 +35,6 @@ export function Book({ book, id }) {
       >
         {show ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </IconButton>
-
       <IconButton
         aria-label="delete"
         onClick={() => navigate("/books/" + id)}
@@ -42,10 +42,12 @@ export function Book({ book, id }) {
       >
         <InfoIcon />
       </IconButton>
-
       {/* conditional rendering */}
       {show ? <p className="book-summary">{book.summary}</p> : null}
-      <Counter />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Counter />
+        {deleteButton}
+      </div>
     </div>
   );
 }

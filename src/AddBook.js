@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-
+import { API } from "./global";
 export function AddBook({ bookList, setBookList }) {
   const [name, setName] = useState("");
   const [poster, setPoster] = useState("");
@@ -16,25 +16,29 @@ export function AddBook({ bookList, setBookList }) {
         label="Name"
         variant="outlined"
         value={name}
-        onChange={(event) => setName(event.target.value)} />
+        onChange={(event) => setName(event.target.value)}
+      />
       <TextField
         id="outlined-basic"
         label="Poster"
         variant="outlined"
         value={poster}
-        onChange={(event) => setPoster(event.target.value)} />
+        onChange={(event) => setPoster(event.target.value)}
+      />
       <TextField
         id="outlined-basic"
         label="Rating"
         variant="outlined"
         value={rating}
-        onChange={(event) => setRating(event.target.value)} />
+        onChange={(event) => setRating(event.target.value)}
+      />
       <TextField
         id="outlined-basic"
         label="Summary"
         variant="outlined"
         value={summary}
-        onChange={(event) => setSummary(event.target.value)} />
+        onChange={(event) => setSummary(event.target.value)}
+      />
 
       {/* copy the bookList and add newBook */}
 
@@ -47,8 +51,21 @@ export function AddBook({ bookList, setBookList }) {
             rating: rating,
             summary: summary,
           };
-          setBookList([...bookList, newBook]);
-          navigate("/books");
+          // setBookList([...bookList, newBook]);
+          // navigate("/books");
+          //1. method- POST ✅
+          //2. body - data - JSON
+          //3. Headers - JSON
+
+          fetch(`${API}/books`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newBook),
+          })
+            .then((data) => data.json())
+            .then(() => navigate("/books"));
         }}
       >
         Add Book

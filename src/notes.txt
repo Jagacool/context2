@@ -135,3 +135,34 @@
           </li>
         </ul>
       </nav> */}
+
+
+
+
+       onClick={() => {
+          const newBook = {
+            name: name,
+            poster: poster,
+            rating: rating,
+            summary: summary,
+            trailer: trailer,
+          };
+        
+          fetch(`${API}/books`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newBook),
+          })
+            .then((data) => data.json())
+            .then(() => navigate("/books"));
+        }}
+
+
+
+        // const [name, setName] = useState("");
+  // const [poster, setPoster] = useState("");
+  // const [rating, setRating] = useState("");
+  // const [summary, setSummary] = useState("");
+  // const [trailer, setTrailer] = useState("");

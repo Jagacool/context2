@@ -8,7 +8,7 @@ export function AddBook() {
   const [poster, setPoster] = useState("");
   const [rating, setRating] = useState("");
   const [summary, setSummary] = useState("");
-  const [trailer, setTrailer] = useState("2");
+  const [trailer, setTrailer] = useState("");
 
   const navigate = useNavigate();
   return (

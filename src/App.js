@@ -19,6 +19,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { ExampleContext } from "./ExampleContext";
 import { EditBook } from "./EditBook";
+import BasicForm from "./BasicForm";
 const INITIAL_BOOK_LIST = [
   {
     name: "Charlotte's web",
@@ -118,6 +119,9 @@ export default function App() {
             <Button color="inherit" onClick={() => navigate("/context")}>
               Context
             </Button>
+            <Button color="inherit" onClick={() => navigate("/form")}>
+              Basic Form
+            </Button>
             <Button
               sx={{ marginLeft: "auto" }}
               startIcon={
@@ -142,6 +146,7 @@ export default function App() {
           <Route path="/add-color" element={<AddColor />} />
           <Route path="/profile" element={<Users />} />
           <Route path="/context" element={<ExampleContext />} />
+          <Route path="/form" element={<BasicForm />} />
           <Route path="/novel" element={<Navigate replace to="/books" />} />
           <Route path="/404" element={<NotFoundPage />} />
           <Route path="*" element={<Navigate replace to="/404" />} />

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Confetti from "react-confetti";
-// import useWindowSize from "./useWindowSize";
+import useWindowSize from 'react-use/lib/useWindowSize'
 
 export function Tictactoe() {
-  // const { width, height } = useWindowSize();
+  const { width, height } = useWindowSize()
 
   const [board, setBoard] = useState([
     null,
@@ -56,7 +56,7 @@ export function Tictactoe() {
   return (
     <div className="full-game">
       <h1>Tic Tac Toe</h1>
-      {/* {winner ? <Confetti width={width} height={height} /> : ""} */}
+      {winner ? <Confetti width={width} height={height} /> : ""}
       <div className="board">
         {board.map((val, index) => (
           <GameBox val={val} onPlayerClick={() => handleClick(index)} />

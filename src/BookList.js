@@ -11,6 +11,7 @@ export function BookList() {
   //const bookList = INITIAL_BOOK_LIST;
   // Lifting the state up =>  Lifted from child to parent
   const [bookList, setBookList] = useState([]);
+  const [filteredSearch, setFilteredSearch] = useState(bookList);
 
   const getBooks = () => {
     fetch(`${API}/books`, {
@@ -23,49 +24,23 @@ export function BookList() {
   useEffect(() => getBooks(), []);
   const navigate = useNavigate();
 
-  return (
-    <div>
-      <div className="book-list">
-        {bookList.map((bk, index) => (
-          <Book
-            key={bk.id}
-            book={bk}
-            id={bk.id}
-            deleteButton={
-              <IconButton
-                aria-label="delete"
-                color="error"
-                onClick={() => {
-                  fetch(`${API}/books/${bk.id}`, {
-                    method: "DELETE",
-                  }).then(() => getBooks());
-                }}
+  const handleSearch = (event) => {
+    if (event.target.value === "") {
+      setFilteredSearch(bookList);
+      return;
+    }
+    const filteredValue = bookList.filter(
+      (item) =>
+        item.name.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1
+    );
+    setFilteredSearch(filteredValue);
+  };
 
-                // onClick={() => {
-                //   console.log("BookList", bookList);
-                //   let copyBookList = [...bookList];
-                //   console.log("copyBookList", copyBookList);
-                //   let removedBook = copyBookList.splice(index, 1);
-                //   console.log("removedBook", removedBook);
-                //   console.log("index", index);
-                //   setBookList(copyBookList);
-                // }}
-              >
-                <DeleteIcon />
-              </IconButton>
-            }
-            editButton={
-              <IconButton
-                aria-label="delete"
-                color="secondary"
-                onClick={() => navigate(`/books/edit/${bk.id}`)}
-              >
-                <EditIcon />
-              </IconButton>
-            }
-          />
-        ))}
-      </div>
+  return (
+    <div className="book-list">
+      {bookList.map((bk, index) => (
+        <Book key={index} book={bk} id={bk.id} />
+      ))}
     </div>
   );
 }

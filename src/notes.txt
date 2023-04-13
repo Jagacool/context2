@@ -166,3 +166,56 @@
   // const [rating, setRating] = useState("");
   // const [summary, setSummary] = useState("");
   // const [trailer, setTrailer] = useState("");
+
+
+
+   // <div>
+    //   <div>Filter by Book: </div>
+
+    //   {/* {filteredSearch &&
+    //     filteredSearch.map((item, index) => <div key={index}>{item}</div>)} */}
+    //   <div className="book-list">
+    //     <div>
+    //       Search: <input name="query" type="text" onChange={handleSearch} />
+    //     </div>
+    //     {filteredSearch.map((bk, index) => (
+    //       <Book
+    //         key={bk.id}
+    //         book={bk}
+    //         id={bk.id}
+    //         deleteButton={
+    //           <IconButton
+    //             aria-label="delete"
+    //             color="error"
+    //             onClick={() => {
+    //               fetch(`${API}/books/${bk.id}`, {
+    //                 method: "DELETE",
+    //               }).then(() => getBooks());
+    //             }}
+
+    //             // onClick={() => {
+    //             //   console.log("BookList", bookList);
+    //             //   let copyBookList = [...bookList];
+    //             //   console.log("copyBookList", copyBookList);
+    //             //   let removedBook = copyBookList.splice(index, 1);
+    //             //   console.log("removedBook", removedBook);
+    //             //   console.log("index", index);
+    //             //   setBookList(copyBookList);
+    //             // }}
+    //           >
+    //             <DeleteIcon />
+    //           </IconButton>
+    //         }
+    //         editButton={
+    //           <IconButton
+    //             aria-label="delete"
+    //             color="secondary"
+    //             onClick={() => navigate(`/books/edit/${bk.id}`)}
+    //           >
+    //             <EditIcon />
+    //           </IconButton>
+    //         }
+    //       />
+    //     ))}
+    //   </div>
+    // </div>

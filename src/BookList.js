@@ -22,6 +22,12 @@ export function BookList() {
   };
 
   useEffect(() => getBooks(), []);
+  sessionStorage.setItem("BookList", JSON.stringify(bookList));
+
+  var b = sessionStorage.getItem("BookList", JSON.stringify(bookList));
+  console.log("sessionstorage", b);
+  // var c = localStorage.removeItem("BookList", JSON.stringify(bookList));
+  // console.log(c);
   const navigate = useNavigate();
 
   const handleSearch = (event) => {

@@ -15,7 +15,7 @@ export function BookDetail() {
       .then((res) => res.json())
       .then((bk) => setBook(bk));
   }, []);
-
+  localStorage.setItem("Book", JSON.stringify(book));
   // console.log(bookList[bookid]);
   // const book = bookList[bookid];
   const navigate = useNavigate();
